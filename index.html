@@ -15,43 +15,46 @@
         <div class="box">
             <input class="firstRow rollNo br-top-l" type="text" placeholder="Roll Number" disabled>
             <input class="firstRow Name br-top-r" type="text" placeholder="Name" disabled>
-            <input class="secondRow Marks br-bot-l br-bot-r" type="text" placeholder="Marks">
+            <input class="secondRow Marks br-bot-l br-bot-r" type="text" placeholder="Marks"
+                oninput="handleMarks(this)">
         </div>
         <button class="next" onclick="changeStudent('1')"><img src="icons/Next.png" alt="Next"></button>
     </div>
 
     <script>
+        let marks = "";
         let rollNo = document.querySelector(".rollNo");
         let Name = document.querySelector(".Name");
         let Marks = document.querySelector(".Marks");
         let Data = [{
-            name: "shadow",
+            name: "Shadow",
             roll: 2063012,
-            marks: 0
+            marks: -1
         },
         {
-            name: "shahid",
+            name: "Shahid",
             roll: 202412,
-            marks: 0
+            marks: -1
         },
         {
-            name: "zahid",
+            name: "Zahid",
             roll: 32221,
-            marks: 0
+            marks: -1
         },
         {
-            name: "kabir",
+            name: "Kabir",
             roll: 4311,
-            marks: 0
+            marks: -1
         },
         {
-            name: "meher",
+            name: "Meher",
             roll: 1351,
-            marks: 0
+            marks: -1
         }
         ];
         let currentStudent = 0;
         function changeStudent(val) {
+            marks = "";
             val = parseInt(val);
             if ((currentStudent == 0 && val < 0) || (currentStudent == Data.length - 1 && val > 0)) {
                 currentStudent ? alert("Last Student") : alert("First Student");
@@ -59,13 +62,28 @@
             }
             Data[currentStudent].marks = Marks.value;
             currentStudent += val;
+
+            if (Data[currentStudent].marks < 0) {
+                Marks.value = "";
+            }
             rollNo.value = Data[currentStudent].roll;
             Name.value = Data[currentStudent].name;
-            Marks.value = Data[currentStudent].marks;
+            if (Data[currentStudent].marks >= 0) {
+                Marks.value = Data[currentStudent].marks;
+            }
+        }
+        function handleMarks(val) {
+            let pattren = /^\d+$/i
+            changeMarks = pattren.test(Marks.value);
+            if (changeMarks) {
+                marks = Marks.value;
+            }
+            else {
+                Marks.value = marks;
+            }
         }
         rollNo.value = Data[currentStudent].roll;
         Name.value = Data[currentStudent].name;
-        Marks.value = Data[currentStudent].marks;
     </script>
 </body>
 
