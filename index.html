@@ -54,6 +54,7 @@
         function changeStudent(val) {
             val = parseInt(val);
             if ((currentStudent == 0 && val < 0) || (currentStudent == Data.length - 1 && val > 0)) {
+                currentStudent ? alert("Last Student") : alert("First Student");
                 return
             }
             Data[currentStudent].marks = Marks.value;
