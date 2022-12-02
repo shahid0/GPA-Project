@@ -15,14 +15,12 @@
         <div class="box">
             <input class="firstRow rollNo br-top-l" type="text" placeholder="Roll Number" disabled>
             <input class="firstRow Name br-top-r" type="text" placeholder="Name" disabled>
-            <input class="secondRow Marks br-bot-l br-bot-r" type="text" placeholder="Marks"
-                oninput="handleMarks(this)">
+            <input class="secondRow Marks br-bot-l br-bot-r" type="number" min="0" max="30" placeholder="Marks">
         </div>
         <button class="next" onclick="changeStudent('1')"><img src="icons/Next.png" alt="Next"></button>
     </div>
 
     <script>
-        let marks = "";
         let rollNo = document.querySelector(".rollNo");
         let Name = document.querySelector(".Name");
         let Marks = document.querySelector(".Marks");
@@ -54,32 +52,24 @@
         ];
         let currentStudent = 0;
         function changeStudent(val) {
-            marks = "";
             val = parseInt(val);
             if ((currentStudent == 0 && val < 0) || (currentStudent == Data.length - 1 && val > 0)) {
                 currentStudent ? alert("Last Student") : alert("First Student");
                 return
             }
+            if(parseInt(Marks.value) > 20){
+                alert("Marks cannot be higher then 20");
+                return;
+            }
             Data[currentStudent].marks = Marks.value;
             currentStudent += val;
 
-            if (Data[currentStudent].marks < 0) {
-                Marks.value = "";
-            }
             rollNo.value = Data[currentStudent].roll;
             Name.value = Data[currentStudent].name;
             if (Data[currentStudent].marks >= 0) {
                 Marks.value = Data[currentStudent].marks;
-            }
-        }
-        function handleMarks(val) {
-            let pattren = /^\d+$/i
-            changeMarks = pattren.test(Marks.value);
-            if (changeMarks) {
-                marks = Marks.value;
-            }
-            else {
-                Marks.value = marks;
+            } else {
+                Marks.value = "";
             }
         }
         rollNo.value = Data[currentStudent].roll;
