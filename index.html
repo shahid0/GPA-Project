@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="newStyle.css">
+    <title>Midterm Data entry</title>
+</head>
+
+<body>
+    <div class="form">
+        <button class="back" onclick="changeStudent('-1')"><img src="/icons/Back.svg" alt="Back"></button>
+        <div class="box">
+            <input class="firstRow rollNo br-top-l" type="text" placeholder="Roll Number" disabled>
+            <input class="firstRow Name br-top-r" type="text" placeholder="Name" disabled>
+            <input class="secondRow Marks br-bot-l br-bot-r" type="text" placeholder="Marks">
+        </div>
+        <button class="next" onclick="changeStudent('1')"><img src="/icons/Next.svg" alt="Next"></button>
+    </div>
+
+
+    <script>
+        let rollNo = document.querySelector(".rollNo");
+        let Name = document.querySelector(".Name");
+        let Marks = document.querySelector(".Marks");
+        let Data = [{
+            name: "shadow",
+            roll: 2063012,
+            marks: 0
+        },
+        {
+            name: "shahid",
+            roll: 202412,
+            marks: 0
+        },
+        {
+            name: "zahid",
+            roll: 32221,
+            marks: 0
+        },
+        {
+            name: "kabir",
+            roll: 4311,
+            marks: 0
+        },
+        {
+            name: "mahir",
+            roll: 1351,
+            marks: 0
+        }
+        ];
+        let currentStudent = 0;
+        function changeStudent(val) {
+            val = parseInt(val);
+            if ((currentStudent == 0 && val < 0) || (currentStudent == Data.length - 1 && val > 0)) {
+                return
+            }
+            Data[currentStudent].marks = Marks.value;
+            currentStudent += val;
+            rollNo.value = Data[currentStudent].roll;
+            Name.value = Data[currentStudent].name;
+            Marks.value = Data[currentStudent].marks;
+        }
+        rollNo.value = Data[currentStudent].roll;
+        Name.value = Data[currentStudent].name;
+        Marks.value = Data[currentStudent].marks;
+    </script>
+</body>
+
+</html>
