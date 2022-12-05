@@ -20,7 +20,7 @@ body{
     align-content: center;
 }
 .firstRow{
-    width: 226px;
+    width: calc(50% - 24px);
 }
 .secondRow{
     width: 100%;
@@ -65,4 +65,17 @@ button:hover{
 }
 button > img{
     mix-blend-mode: luminosity;
+}
+
+@media only screen and (max-width: 850px){
+    .form{
+        flex-direction: column;
+    }
+    .back , .next{
+        margin: 40px 0;
+    }
+    .box{
+        width: auto;
+        margin: 0 10px ;
+    }
 }
