@@ -15,15 +15,13 @@
         <div class="box">
             <input class="firstRow rollNo br-top-l" type="text" placeholder="Roll Number" disabled>
             <input class="firstRow Name br-top-r" type="text" placeholder="Name" disabled>
-            <input class="secondRow Marks br-bot-l br-bot-r" type="number" min="0" max="30" placeholder="Marks">
+            <input class="secondRow Marks br-bot-l br-bot-r" type="number" min="0" max="20" placeholder="Marks">
         </div>
         <button class="next" onclick="changeStudent('1')"><img src="icons/Next.png" alt="Next"></button>
     </div>
 
     <script>
-        let rollNo = document.querySelector(".rollNo");
-        let Name = document.querySelector(".Name");
-        let Marks = document.querySelector(".Marks");
+        //dummy Data
         let Data = [{
             name: "Shadow",
             roll: 2063012,
@@ -50,30 +48,48 @@
             marks: -1
         }
         ];
+
+        //seleting inputs
+        const rollNo = document.querySelector(".rollNo");
+        const Name = document.querySelector(".Name");
+        const Marks = document.querySelector(".Marks");
+
+        //variable to access the index
         let currentStudent = 0;
+
+        //setting up first student
+        rollNo.value = Data[currentStudent].roll;
+        Name.value = Data[currentStudent].name;
+        
+        //function to store current data and change student
         function changeStudent(val) {
             val = parseInt(val);
+
+            //Checking User loaction and stopping at from going back when first student or going beyond last student 
             if ((currentStudent == 0 && val < 0) || (currentStudent == Data.length - 1 && val > 0)) {
                 currentStudent ? alert("Last Student") : alert("First Student");
                 return
             }
-            if(parseInt(Marks.value) > 20){
-                alert("Marks cannot be higher then 20");
+
+            //Limiting entery adove 20
+            if (parseInt(Marks.value) > 20 || parseInt(Marks.value) < 0) {
+                alert("Marks cannot be higher then 20 and less then 0");
                 return;
             }
+
+            //storing data current student marks to database/object and changing to next student
             Data[currentStudent].marks = Marks.value;
             currentStudent += val;
-
             rollNo.value = Data[currentStudent].roll;
             Name.value = Data[currentStudent].name;
+
+            //checking if student marks are already entered if yes load that info else input value should be empty string
             if (Data[currentStudent].marks >= 0) {
                 Marks.value = Data[currentStudent].marks;
             } else {
                 Marks.value = "";
             }
         }
-        rollNo.value = Data[currentStudent].roll;
-        Name.value = Data[currentStudent].name;
     </script>
 </body>
 
