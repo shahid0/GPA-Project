@@ -38,6 +38,7 @@ input{
 }
 button{
     border: none;
+    background-color: transparent;
     padding: 0;
     cursor: pointer;
     transition: transform 0.2s;
